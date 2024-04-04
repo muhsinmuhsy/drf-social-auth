@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+from datetime import timedelta
 # import environ
 
 # env = environ.Env(
@@ -136,10 +137,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_DIR = os.path.join(BASE_DIR, 'static/')
+
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [STATIC_DIR]
-STATIC_ROOT = BASE_DIR / "staticfiles/static"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -159,3 +159,27 @@ AUTH_USER_MODEL = "auth_app.User"
 CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ALLOW_CREDENTIALS = True
+
+
+EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
+EMAIL_HOST_USER = 'b2f25b2019e897'
+EMAIL_HOST_PASSWORD = '566cb0ec6f3e28'
+EMAIL_PORT = '2525'
+DEFAULT_FROM_EMAIL = 'muhsytest@gmail.com'
+EMAIL_USE_TLS = True
+
+
+REST_FRAMEWORK = {
+    
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+    
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=10),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "AUTH_HEADER_TYPES": ("Bearer",),
+}
